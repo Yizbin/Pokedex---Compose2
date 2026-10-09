@@ -1,0 +1,22 @@
+<resources>
+    <string name="app_name">Pokedex Lucario</string>
+    <string name="nombre_app">Pokedex Lucario</string>
+    <string name="nombre_pokemon">Lucario</string>
+    <string name="numero_pokemon">#0448</string>
+
+    <string name="tipo_lucha">Lucha</string>
+    <string name="tipo_acero">Acero</string>
+
+    <string name="estadistica_altura_titulo">Altura</string>
+    <string name="estadistica_altura_valor">1,2m</string>
+    <string name="estadistica_peso_titulo">Peso</string>
+    <string name="estadistica_peso_valor">54,0kg</string>
+
+    <string name="estadistica_habilidad_titulo">Habilidad</string>
+    <string name="estadistica_habilidad_valor">Foco Interno</string>
+
+    <string name="descripcion_pokemon">Al captar el aura que emanan los demás, este Pokémon puede leer sus pensamientos y movimientos. Un aura bien entrenada puede generar energía devastadora.</string>
+
+    <string name="pokemon_anterior">Riolu N.º 0447</string>
+    <string name="pokemon_siguiente">Hippopotas N.º 0449</string>
+</resources>

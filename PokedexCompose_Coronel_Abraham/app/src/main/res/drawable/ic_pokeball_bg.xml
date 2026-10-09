@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="250dp"
+    android:height="250dp"
+    android:viewportWidth="100"
+    android:viewportHeight="100">
+
+    <!-- Mitad superior roja -->
+    <path
+        android:fillColor="@color/color_pokeball"
+        android:pathData="M 5,50 A 45,45 0 0,1 95,50 L 70,50 A 20,20 0 0,0 30,50 Z" />
+
+    <!-- Borde circular exterior -->
+    <path
+        android:strokeColor="#222222"
+        android:strokeWidth="8"
+        android:pathData="M 50,5 A 45,45 0 1,1 49.9,5" />
+
+    <!-- Linea central izquierda -->
+    <path
+        android:strokeColor="#222222"
+        android:strokeWidth="8"
+        android:pathData="M 5,50 L 30,50" />
+
+    <!-- Linea central derecha -->
+    <path
+        android:strokeColor="#222222"
+        android:strokeWidth="8"
+        android:pathData="M 70,50 L 95,50" />
+
+    <!-- Anillo central -->
+    <path
+        android:strokeColor="#222222"
+        android:strokeWidth="10"
+        android:pathData="M 50,35 A 15,15 0 1,1 49.9,35" />
+</vector>

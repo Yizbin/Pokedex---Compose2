@@ -1,0 +1,47 @@
+# Gradle
+.gradle/
+build/
+!gradle/wrapper/gradle-wrapper.jar
+
+# Android Studio
+.idea/
+*.iml
+*.iws
+*.ipr
+
+# Local configuration
+local.properties
+
+# Android build outputs
+*/build/
+captures/
+.externalNativeBuild/
+.cxx/
+
+# Generated files
+gen/
+out/
+
+# Keystore / signing files
+*.jks
+*.keystore
+
+# Google Services
+google-services.json
+
+# Kotlin
+.kotlin/
+
+# OS generated files
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+
+# Temporary files
+*.tmp
+*.temp
+
+# Firebase / Crashlytics
+com_crashlytics_build_id
