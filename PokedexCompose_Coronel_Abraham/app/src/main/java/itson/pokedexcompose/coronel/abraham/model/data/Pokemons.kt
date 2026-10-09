@@ -41,7 +41,9 @@ val bulbasaur = Pokemon(
 fun getFavoritePokemons(): List<Pokemon> {
     return pokemonList.filter {
         it.favorito
-
-
     }
+}
+
+fun getPokemonByNumber(numero: Int): Pokemon? {
+    return pokemonList.find { it.numero == numero }
 }

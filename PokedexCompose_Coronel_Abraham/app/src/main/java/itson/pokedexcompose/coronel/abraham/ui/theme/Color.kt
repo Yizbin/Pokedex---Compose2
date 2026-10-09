@@ -19,6 +19,9 @@ val TextoGris = Color(0xFF666666)
 val TextoNumeroOscuro = Color(0x99000000)
 
 val Green = Color(0xFF81CA85)
+val LightGreen = Color(0xFFCCFFCE)
+val Blue = Color(0xFF4D92D2)
+val LightBlue = Color(0xFFA5CEFD)
 
 val OffWhite = Color(0xFFFAFAFA)
 val DarkGray = Color(0xFF1F1F1F)

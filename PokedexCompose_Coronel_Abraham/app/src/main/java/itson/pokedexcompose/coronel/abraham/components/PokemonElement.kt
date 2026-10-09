@@ -3,6 +3,7 @@ package itson.pokedexcompose.coronel.abraham.components
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.border
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -27,10 +28,11 @@ import itson.pokedexcompose.coronel.abraham.ui.theme.OffWhite
 import itson.pokedexcompose.coronel.abraham.utilities.getColorByType
 
 @Composable
-fun PokemonRow(pokemon: Pokemon, modifier: Modifier = Modifier) {
+fun PokemonRow(pokemon: Pokemon, modifier: Modifier = Modifier, onClick: () -> Unit = {}) {
     Row(
         modifier = modifier
             .fillMaxWidth()
+            .clickable { onClick() }
             .padding(10.dp),
         verticalAlignment = Alignment.CenterVertically
     ) {
@@ -80,10 +82,12 @@ fun PokemonRow(pokemon: Pokemon, modifier: Modifier = Modifier) {
 }
 
 @Composable
-fun FavoritePokemon(pokemon: Pokemon, modifier: Modifier = Modifier) {
+fun FavoritePokemon(pokemon: Pokemon, modifier: Modifier = Modifier, onClick: () -> Unit = {}) {
     val typeColors = getColorByType(pokemon.tipo)
     Column(
-        modifier = modifier.padding(vertical = 15.dp),
+        modifier = modifier
+            .clickable { onClick() }
+            .padding(vertical = 15.dp),
         verticalArrangement = Arrangement.spacedBy(10.dp),
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
@@ -126,10 +130,10 @@ fun FavoritePokemon(pokemon: Pokemon, modifier: Modifier = Modifier) {
 }
 
 @Composable
-fun PokemonCell(pokemon: Pokemon, modifier: Modifier = Modifier) {
+fun PokemonCell(pokemon: Pokemon, modifier: Modifier = Modifier, onClick: () -> Unit = {}) {
     val typeColors = getColorByType(pokemon.tipo)
     Column(
-        modifier = modifier,
+        modifier = modifier.clickable { onClick() },
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.spacedBy(8.dp)
     ) {

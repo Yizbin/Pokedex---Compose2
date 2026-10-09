@@ -19,6 +19,7 @@ import itson.pokedexcompose.coronel.abraham.model.domain.Pokemon
 fun FavoritesRow(
     favoriteList: List<Pokemon>,
     modifier: Modifier = Modifier,
+    onPokemonClick: (Int) -> Unit = {}
 ) {
     LazyRow(
         modifier = modifier,
@@ -26,7 +27,10 @@ fun FavoritesRow(
         contentPadding = PaddingValues(horizontal = 5.dp)
     ) {
         items(favoriteList) { pokemon ->
-            FavoritePokemon(pokemon = pokemon)
+            FavoritePokemon(
+                pokemon = pokemon,
+                onClick = { onPokemonClick(pokemon.numero) }
+            )
         }
     }
 }
@@ -34,7 +38,8 @@ fun FavoritesRow(
 @Composable
 fun PokedexGrid(
     pokemonList: List<Pokemon>,
-    modifier: Modifier = Modifier
+    modifier: Modifier = Modifier,
+    onPokemonClick: (Int) -> Unit = {}
 ) {
     LazyVerticalGrid(
         columns = GridCells.Fixed(3),
@@ -44,7 +49,10 @@ fun PokedexGrid(
         modifier = modifier
     ) {
         items(pokemonList) { pokemon ->
-            PokemonCell(pokemon = pokemon)
+            PokemonCell(
+                pokemon = pokemon,
+                onClick = { onPokemonClick(pokemon.numero) }
+            )
         }
     }
 }
@@ -52,13 +60,17 @@ fun PokedexGrid(
 @Composable
 fun MenuPokedex(
     pokemonList: List<Pokemon>,
-    modifier: Modifier = Modifier
+    modifier: Modifier = Modifier,
+    onPokemonClick: (Int) -> Unit = {}
 ) {
     LazyColumn(
         modifier = modifier
     ) {
         items(pokemonList) { pokemon ->
-            PokemonRow(pokemon = pokemon)
+            PokemonRow(
+                pokemon = pokemon,
+                onClick = { onPokemonClick(pokemon.numero) }
+            )
         }
     }
 }

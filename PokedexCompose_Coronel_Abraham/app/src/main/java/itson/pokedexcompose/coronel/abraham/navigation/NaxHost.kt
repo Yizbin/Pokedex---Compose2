@@ -6,18 +6,31 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import itson.pokedexcompose.coronel.abraham.screens.MenuPokedexScreen
+import itson.pokedexcompose.coronel.abraham.screens.PokemonDetailScreen
 
 @Composable
-fun MyApp(innerPaddingValues: PaddingValues) {
+fun MyApp(innerPaddingValues: PaddingValues = PaddingValues()) {
     val navController = rememberNavController()
-    NavHost(navController, startDestination = PokemonList) {
+    NavHost(navController = navController, startDestination = PokemonList) {
         composable<PokemonList> {
-            MenuPokedexScreen(innerPadding, onNavigateToDetail = {id -> navController.navigate(route = PokemonDetail(id))})
+            MenuPokedexScreen(
+                innerPadding = innerPaddingValues,
+                onNavigateToDetail = { id ->
+                    navController.navigate(route = PokemonDetail(id))
+                }
+            )
         }
 
-        composable<PokemonDetail>(){
-            val pokemon = it.arguments?.getInt("pokemon") ?: -1
-            PokemonDetailScreen(innerPadding, getPokemonByNumber(pokemon))
+        composable<PokemonDetail> { backStackEntry ->
+            val pokemon = backStackEntry.arguments?.getInt("pokemon") ?: -1
+            PokemonDetailScreen(
+                innerPaddingValues = innerPaddingValues,
+                pokemonId = pokemon,
+                onBackClick = { navController.popBackStack() },
+                onNavigateToPokemon = { nextId ->
+                    navController.navigate(route = PokemonDetail(nextId))
+                }
+            )
         }
     }
 }
