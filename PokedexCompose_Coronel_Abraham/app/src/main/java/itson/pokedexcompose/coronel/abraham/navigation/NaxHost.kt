@@ -7,6 +7,7 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import itson.pokedexcompose.coronel.abraham.screens.MenuPokedexScreen
 import itson.pokedexcompose.coronel.abraham.screens.PokemonDetailScreen
+import itson.pokedexcompose.coronel.abraham.screens.PokemonHuntScreen
 
 @Composable
 fun MyApp(innerPaddingValues: PaddingValues = PaddingValues()) {
@@ -17,7 +18,8 @@ fun MyApp(innerPaddingValues: PaddingValues = PaddingValues()) {
                 innerPadding = innerPaddingValues,
                 onNavigateToDetail = { id ->
                     navController.navigate(route = PokemonDetail(id))
-                }
+                },
+                onNavigateToHunt = {navController.navigate(route = PokemonHunt)}
             )
         }
 
@@ -31,6 +33,10 @@ fun MyApp(innerPaddingValues: PaddingValues = PaddingValues()) {
                     navController.navigate(route = PokemonDetail(nextId))
                 }
             )
+        }
+
+        composable<PokemonHunt>{
+            PokemonHuntScreen(innerPaddingValues)
         }
     }
 }

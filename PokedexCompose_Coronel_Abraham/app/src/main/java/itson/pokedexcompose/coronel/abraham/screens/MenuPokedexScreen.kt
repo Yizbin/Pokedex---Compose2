@@ -39,7 +39,7 @@ import itson.pokedexcompose.coronel.abraham.ui.theme.LightGreen
 fun MenuPokedexScreen(
     innerPadding: PaddingValues = PaddingValues(),
     modifier: Modifier = Modifier,
-    onNavigateToDetail: (id: Int) -> Unit = {}
+    onNavigateToHunt: () -> Unit = {}
 ) {
     val favorites = pokemonList.filter { it.favorito }
     var grid by remember { mutableStateOf(value = false) }
@@ -58,7 +58,7 @@ fun MenuPokedexScreen(
 
         FavoritesRow(
             favoriteList = favorites,
-            onPokemonClick = onNavigateToDetail
+            onPokemonClick = onNavigateToHunt
         )
 
         Row(
@@ -106,13 +106,13 @@ fun MenuPokedexScreen(
             PokedexGrid(
                 pokemonList = pokemonList,
                 modifier = Modifier.weight(1f),
-                onPokemonClick = onNavigateToDetail
+                onPokemonClick = onNavigateToHunt
             )
         } else {
             MenuPokedex(
                 pokemonList = pokemonList,
                 modifier = Modifier.weight(1f),
-                onPokemonClick = onNavigateToDetail
+                onPokemonClick = onNavigateToHunt
             )
         }
     }
