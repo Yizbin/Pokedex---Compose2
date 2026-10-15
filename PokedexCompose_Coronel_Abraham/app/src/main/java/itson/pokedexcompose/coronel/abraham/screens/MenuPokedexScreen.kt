@@ -8,6 +8,7 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.material3.Button
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Switch
@@ -39,6 +40,7 @@ import itson.pokedexcompose.coronel.abraham.ui.theme.LightGreen
 fun MenuPokedexScreen(
     innerPadding: PaddingValues = PaddingValues(),
     modifier: Modifier = Modifier,
+    onNavigateToDetail: (id: Int) -> Unit = {},
     onNavigateToHunt: () -> Unit = {}
 ) {
     val favorites = pokemonList.filter { it.favorito }
@@ -50,15 +52,24 @@ fun MenuPokedexScreen(
             .fillMaxSize()
             .padding(horizontal = 16.dp, vertical = 8.dp)
     ) {
-        Text(
-            text = "Mis Favoritos",
-            style = MaterialTheme.typography.titleLarge,
-            fontWeight = FontWeight.Bold
-        )
+        Row(
+            modifier = Modifier.fillMaxWidth(),
+            horizontalArrangement = Arrangement.SpaceBetween,
+            verticalAlignment = Alignment.CenterVertically
+        ) {
+            Text(
+                text = "Mis Favoritos",
+                style = MaterialTheme.typography.titleLarge,
+                fontWeight = FontWeight.Bold
+            )
+            Button(onClick = onNavigateToHunt) {
+                Text("Ir a Cazar")
+            }
+        }
 
         FavoritesRow(
             favoriteList = favorites,
-            onPokemonClick = onNavigateToHunt
+            onPokemonClick = onNavigateToDetail
         )
 
         Row(
@@ -106,13 +117,13 @@ fun MenuPokedexScreen(
             PokedexGrid(
                 pokemonList = pokemonList,
                 modifier = Modifier.weight(1f),
-                onPokemonClick = onNavigateToHunt
+                onPokemonClick = onNavigateToDetail
             )
         } else {
             MenuPokedex(
                 pokemonList = pokemonList,
                 modifier = Modifier.weight(1f),
-                onPokemonClick = onNavigateToHunt
+                onPokemonClick = onNavigateToDetail
             )
         }
     }
@@ -123,6 +134,7 @@ fun MenuPokedexScreen(
 fun MenuPokedexScreenPreview() {
     MenuPokedexScreen(
         innerPadding = PaddingValues(),
-        onNavigateToDetail = {}
+        onNavigateToDetail = {},
+        onNavigateToHunt = {}
     )
 }

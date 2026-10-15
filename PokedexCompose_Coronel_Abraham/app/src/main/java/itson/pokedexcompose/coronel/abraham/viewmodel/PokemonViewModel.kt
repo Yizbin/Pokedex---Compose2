@@ -7,24 +7,26 @@ import androidx.lifecycle.ViewModel
 import itson.pokedexcompose.coronel.abraham.model.data.pokemonList
 import itson.pokedexcompose.coronel.abraham.model.domain.Pokemon
 
-class PokemonViewModel : ViewModel(){
+class PokemonViewModel : ViewModel() {
     var wildPokemon by mutableStateOf<Pokemon?>(null)
         private set
 
-    var capturePokemon by mutableStateOf(listOf<Pokemon>())
+    var capturedPokemons by mutableStateOf(listOf<Pokemon>())
         private set
 
     var gonePokemon by mutableStateOf(false)
+        private set
 
     fun searchPokemon() {
         wildPokemon = pokemonList.random()
+        gonePokemon = false
     }
 
-    fun capturePokemon(){
-        wildPokemon?.let{
-            var isCaptured = (1..2).random()
-            if(isCaptured == 1) {
-                capturePokemon = capturePokemon + it
+    fun capturePokemon() {
+        wildPokemon?.let { pokemon ->
+            val isCaptured = (1..2).random()
+            if (isCaptured == 1) {
+                capturedPokemons = capturedPokemons + pokemon
                 gonePokemon = false
                 wildPokemon = null
             } else {
@@ -32,6 +34,5 @@ class PokemonViewModel : ViewModel(){
                 wildPokemon = null
             }
         }
-
     }
 }
