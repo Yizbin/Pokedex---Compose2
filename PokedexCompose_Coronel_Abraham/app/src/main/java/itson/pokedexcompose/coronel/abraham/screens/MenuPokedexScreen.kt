@@ -18,6 +18,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -31,20 +32,23 @@ import itson.pokedexcompose.coronel.abraham.components.FavoritesRow
 import itson.pokedexcompose.coronel.abraham.components.MenuPokedex
 import itson.pokedexcompose.coronel.abraham.components.PokedexGrid
 import itson.pokedexcompose.coronel.abraham.model.data.pokemonList
+import itson.pokedexcompose.coronel.abraham.model.domain.Pokemon
 import itson.pokedexcompose.coronel.abraham.ui.theme.Blue
 import itson.pokedexcompose.coronel.abraham.ui.theme.Green
 import itson.pokedexcompose.coronel.abraham.ui.theme.LightBlue
 import itson.pokedexcompose.coronel.abraham.ui.theme.LightGreen
+import itson.pokedexcompose.coronel.abraham.viewmodel.PokemonViewModel
 
 @Composable
 fun MenuPokedexScreen(
+    pokemonList: List<Pokemon>,
+    favorites: List<Pokemon>,
     innerPadding: PaddingValues = PaddingValues(),
     modifier: Modifier = Modifier,
     onNavigateToDetail: (id: Int) -> Unit = {},
     onNavigateToHunt: () -> Unit = {}
 ) {
-    val favorites = pokemonList.filter { it.favorito }
-    var grid by remember { mutableStateOf(value = false) }
+    var grid by rememberSaveable { mutableStateOf(value = false) }
 
     Column(
         modifier = modifier
@@ -52,20 +56,18 @@ fun MenuPokedexScreen(
             .fillMaxSize()
             .padding(horizontal = 16.dp, vertical = 8.dp)
     ) {
-        Row(
-            modifier = Modifier.fillMaxWidth(),
-            horizontalArrangement = Arrangement.SpaceBetween,
-            verticalAlignment = Alignment.CenterVertically
+        Button(
+            onClick = onNavigateToHunt,
+            modifier = Modifier.fillMaxWidth()
         ) {
-            Text(
-                text = "Mis Favoritos",
-                style = MaterialTheme.typography.titleLarge,
-                fontWeight = FontWeight.Bold
-            )
-            Button(onClick = onNavigateToHunt) {
-                Text("Ir a Cazar")
-            }
+            Text("Ir a cazar pokemon")
         }
+
+        Text(
+            text = "Mis Favoritos",
+            style = MaterialTheme.typography.titleLarge,
+            fontWeight = FontWeight.Bold
+        )
 
         FavoritesRow(
             favoriteList = favorites,
@@ -133,8 +135,7 @@ fun MenuPokedexScreen(
 @Composable
 fun MenuPokedexScreenPreview() {
     MenuPokedexScreen(
-        innerPadding = PaddingValues(),
-        onNavigateToDetail = {},
-        onNavigateToHunt = {}
+        pokemonList = pokemonList,
+        favorites = pokemonList.filter { it.favorito }
     )
 }

@@ -41,11 +41,12 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import itson.pokedexcompose.coronel.abraham.R
-import itson.pokedexcompose.coronel.abraham.model.data.getPokemonByNumber
 import itson.pokedexcompose.coronel.abraham.model.data.pokemonList
+import itson.pokedexcompose.coronel.abraham.model.domain.Pokemon
 import itson.pokedexcompose.coronel.abraham.ui.theme.TextoGris
 import itson.pokedexcompose.coronel.abraham.ui.theme.TextoNumeroOscuro
 import itson.pokedexcompose.coronel.abraham.ui.theme.TextoRojoTitulo
@@ -54,24 +55,21 @@ import itson.pokedexcompose.coronel.abraham.utilities.getColorByType
 @Composable
 fun PokemonDetailScreen(
     innerPaddingValues: PaddingValues = PaddingValues(),
-    pokemonId: Int,
+    pokemon: Pokemon,
+    prevPokemon: Pokemon? = null,
+    nextPokemon: Pokemon? = null,
     onBackClick: () -> Unit = {},
+    onToggleFavorite: () -> Unit = {},
     onNavigateToPokemon: (id: Int) -> Unit = {}
 ) {
-    val pokemon = getPokemonByNumber(pokemonId) ?: return
-
     val mainColor = getColorByType(pokemon.tipo).first
     val types = pokemon.tipo.split("/").map { it.trim() }
-
-    val currentIndex = pokemonList.indexOfFirst { it.numero == pokemon.numero }
-    val prevPokemon = if (currentIndex > 0) pokemonList[currentIndex - 1] else null
-    val nextPokemon = if (currentIndex >= 0 && currentIndex < pokemonList.size - 1) pokemonList[currentIndex + 1] else null
 
     Box(
         modifier = Modifier
             .fillMaxSize()
-            .padding(innerPaddingValues)
             .background(mainColor)
+            .padding(innerPaddingValues)
     ) {
         Image(
             painter = painterResource(id = R.drawable.ic_pokeball_bg),
@@ -116,14 +114,17 @@ fun PokemonDetailScreen(
                     )
                 }
             }
-            Icon(
-                imageVector = if (pokemon.favorito) Icons.Default.Star else Icons.Outlined.StarBorder,
-                contentDescription = "Favorito",
-                tint = if (pokemon.favorito) Color.Yellow else Color.White,
-                modifier = Modifier
-                    .padding(top = 8.dp)
-                    .size(36.dp)
-            )
+            IconButton(
+                onClick = onToggleFavorite,
+                modifier = Modifier.padding(top = 4.dp)
+            ) {
+                Icon(
+                    imageVector = if (pokemon.favorito) Icons.Default.Star else Icons.Outlined.StarBorder,
+                    contentDescription = "Favorito",
+                    tint = if (pokemon.favorito) Color.Yellow else Color.White,
+                    modifier = Modifier.size(36.dp)
+                )
+            }
         }
 
         Surface(
@@ -323,4 +324,14 @@ private fun BotonNavegacionRedondo(icono: ImageVector) {
             modifier = Modifier.size(16.dp)
         )
     }
+}
+
+@Preview(showBackground = true)
+@Composable
+fun PokemonDetailScreenPreview() {
+    PokemonDetailScreen(
+        pokemon = pokemonList[3],
+        prevPokemon = pokemonList[2],
+        nextPokemon = pokemonList[4]
+    )
 }
